@@ -1,1 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Soham Das</title>
+<style>
+  :root {
+    --bg: #ffffff;
+    --text: #1a1a1a;
+    --muted: #6b6b6b;
+    --line: #e5e5e5;
+    --mono: 'SF Mono', 'Menlo', 'Consolas', monospace;
+    --sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  }
 
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 80px 24px 120px;
+  }
+
+  header {
+    margin-bottom: 64px;
+  }
+
+  h1 {
+    font-size: 26px;
+    font-weight: 600;
+    margin: 0 0 6px;
+    letter-spacing: -0.01em;
+  }
+
+  .role {
+    color: var(--muted);
+    font-size: 15px;
+    margin: 0 0 20px;
+  }
+
+  .links {
+    display: flex;
+    gap: 16px;
+    font-family: var(--mono);
+    font-size: 13px;
+  }
+
+  .links a {
+    color: var(--text);
+    text-decoration: none;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 1px;
+  }
+
+  .links a:hover {
+    border-bottom-color: var(--text);
+  }
+
+  section {
+    margin-bottom: 56px;
+  }
+
+  section:last-of-type {
+    margin-bottom: 0;
+  }
+
+  h2 {
+    font-family: var(--mono);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    font-weight: 500;
+    margin: 0 0 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  p {
+    margin: 0 0 16px;
+    color: #333;
+  }
+
+  p:last-child { margin-bottom: 0; }
+
+  .entry {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    padding: 18px 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .entry:last-child { border-bottom: none; }
+
+  .entry-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 16px;
+    margin-bottom: 6px;
+  }
+
+  .entry-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text);
+  }
+
+  .entry-date {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+
+  .entry-desc {
+    font-size: 14px;
+    color: var(--muted);
+    margin: 0;
+  }
+
+  .entry-tags {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 8px;
+  }
+
+  .entry-tags span::after {
+    content: " · ";
+  }
+  .entry-tags span:last-child::after {
+    content: "";
+  }
+
+  @media (max-width: 480px) {
+    .wrap { padding: 48px 20px 80px; }
+    .entry-top { flex-direction: column; gap: 2px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <h1>Soham Das</h1>
+    <p class="role">CS student, University of Cincinnati — AI &amp; autonomous systems</p>
+    <div class="links">
+      <a href="mailto:das2sm@mail.uc.edu">email</a>
+      <a href="https://github.com/das2sm">github</a>
+      <a href="https://linkedin.com/in/soham-s-das">linkedin</a>
+      <a href="/resume.pdf">resume</a>
+    </div>
+  </header>
+
+  <section id="about">
+    <h2>About</h2>
+    <p>
+      I'm a Computer Science student at the University of Cincinnati, mostly interested
+      in perception and safety for autonomous vehicles. I spent early-to-mid 2026 as an undergraduate researcher at Feng Chia University's
+      ACSI Laboratory in Taiwan, working on closed-loop safety for end-to-end driving
+      planners.
+    </p>
+  </section>
+
+  <section id="research">
+    <h2>Research</h2>
+
+    <a class="entry" href="/research/hydrive.html">
+      <div class="entry-top">
+        <span class="entry-title">Privileged Occupancy Filtering for Fixed-Vocabulary End-to-End Driving</span>
+        <span class="entry-date">Jul 2026</span>
+      </div>
+      <p class="entry-desc">
+        A 1,665-job closed-loop intervention study on SparseDriveV2 / Fail2Drive testing
+        whether privileged occupancy can reduce collisions by re-selecting among a
+        planner's existing trajectory proposals.
+      </p>
+      <div class="entry-tags">
+        <span>CARLA</span><span>PyTorch</span><span>experimental design</span><span>manuscript in prep</span>
+      </div>
+    </a>
+
+    <a class="entry" href="/research/sparseocc.html">
+      <div class="entry-top">
+        <span class="entry-title">Reproducing SparseOcc on nuScenes</span>
+        <span class="entry-date">Mar 2026</span>
+      </div>
+      <p class="entry-desc">
+        Matching a published 3D occupancy benchmark (0.368 RayIoU) from scratch,
+        and the dependency hell of getting research code to run on hardware it
+        was never tested on.
+      </p>
+      <div class="entry-tags">
+        <span>3D perception</span><span>Docker</span><span>CUDA</span>
+      </div>
+    </a>
+
+  </section>
+
+  <section id="projects">
+    <h2>Projects</h2>
+
+    <a class="entry" href="/projects/yolov4-edge.html">
+      <div class="entry-top">
+        <span class="entry-title">Real-time traffic sign detection on a $150 board</span>
+        <span class="entry-date">Feb 2026</span>
+      </div>
+      <p class="entry-desc">
+        YOLOv4 trained to 95% mAP@0.5, deployed to an Orange Pi 5 Ultra NPU at
+        60&ndash;70 FPS via a full PyTorch &rarr; ONNX &rarr; RKNN quantization pipeline.
+      </p>
+      <div class="entry-tags">
+        <span>YOLOv4</span><span>edge deployment</span><span>quantization</span>
+      </div>
+    </a>
+
+    <a class="entry" href="/projects/wizzer.html">
+      <div class="entry-top">
+        <span class="entry-title">Backend performance work at Wizzer</span>
+        <span class="entry-date">Summer 2025</span>
+      </div>
+      <p class="entry-desc">
+        Cut API response times 40&ndash;60% through query batching and concurrency;
+        built a deep-link fallback system and a personalized newsletter pipeline.
+      </p>
+      <div class="entry-tags">
+        <span>Node</span><span>PostgreSQL</span><span>performance</span>
+      </div>
+    </a>
+
+  </section>
+
+</div>
+</body>
+</html>
