@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Privileged Occupancy Filtering for Fixed-Vocabulary End-to-End Driving — Soham Das</title>
+<style>
+  :root {
+    --bg: #ffffff;
+    --text: #1a1a1a;
+    --muted: #6b6b6b;
+    --line: #e5e5e5;
+    --mono: 'SF Mono', 'Menlo', 'Consolas', monospace;
+    --sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 48px 24px 120px;
+  }
+
+  .back {
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--muted);
+    text-decoration: none;
+    margin-bottom: 40px;
+  }
+  .back:hover { color: var(--text); }
+
+  header {
+    margin-bottom: 48px;
+    padding-bottom: 32px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  h1 {
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 1.35;
+    margin: 0 0 12px;
+    letter-spacing: -0.01em;
+  }
+
+  .meta {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 14px;
+  }
+
+  .tags {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--muted);
+  }
+  .tags span::after { content: " · "; }
+  .tags span:last-child::after { content: ""; }
+
+  .status {
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--muted);
+    border: 1px solid var(--line);
+    padding: 2px 6px;
+    border-radius: 3px;
+    margin-top: 12px;
+  }
+
+  h2 {
+    font-size: 18px;
+    font-weight: 600;
+    margin: 48px 0 16px;
+  }
+
+  h3 {
+    font-size: 15px;
+    font-weight: 600;
+    margin: 28px 0 12px;
+    color: #333;
+  }
+
+  p {
+    margin: 0 0 16px;
+    color: #2a2a2a;
+  }
+
+  .lede {
+    font-size: 16px;
+    color: var(--muted);
+    margin: 0 0 8px;
+  }
+
+  ul, ol {
+    margin: 0 0 16px;
+    padding-left: 20px;
+    color: #2a2a2a;
+  }
+  li { margin-bottom: 6px; }
+
+  code {
+    font-family: var(--mono);
+    font-size: 13px;
+    background: #f5f5f5;
+    padding: 2px 5px;
+    border-radius: 3px;
+  }
+
+  pre {
+    background: #f7f7f7;
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 14px 16px;
+    overflow-x: auto;
+    font-family: var(--mono);
+    font-size: 12.5px;
+    line-height: 1.6;
+    margin: 0 0 16px;
+  }
+  pre code { background: none; padding: 0; }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0 0 20px;
+    font-size: 14px;
+  }
+  th, td {
+    text-align: left;
+    padding: 8px 10px;
+    border-bottom: 1px solid var(--line);
+  }
+  th {
+    font-family: var(--mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--muted);
+    font-weight: 500;
+  }
+  td.num, th.num { text-align: right; font-family: var(--mono); }
+
+  blockquote {
+    margin: 20px 0;
+    padding: 4px 0 4px 16px;
+    border-left: 2px solid var(--line);
+    color: var(--muted);
+    font-size: 14.5px;
+  }
+
+  .callout {
+    background: #fafafa;
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 16px 18px;
+    margin: 24px 0;
+    font-size: 14.5px;
+  }
+  .callout p:last-child { margin-bottom: 0; }
+  .callout-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--muted);
+    margin-bottom: 8px;
+  }
+
+  .limits li {
+    color: #444;
+  }
+
+  footer {
+    margin-top: 56px;
+    padding-top: 24px;
+    border-top: 1px solid var(--line);
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--muted);
+  }
+  footer a { color: var(--text); }
+
+  @media (max-width: 480px) {
+    .wrap { padding: 32px 20px 80px; }
+    table { font-size: 13px; }
+    th, td { padding: 6px 6px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <a class="back" href="/">&larr; back</a>
+
+  <header>
+    <h1>Privileged Occupancy Filtering for Fixed-Vocabulary End-to-End Driving</h1>
+    <div class="meta">July 2026 &nbsp;·&nbsp; ACSI Laboratory, Feng Chia University &nbsp;·&nbsp; advisor: Dr. Yu-Chen Lin</div>
+    <div class="tags">
+      <span>CARLA</span><span>SparseDriveV2</span><span>Fail2Drive</span><span>PyTorch</span><span>experimental design</span>
+    </div>
+    <span class="status">manuscript in preparation</span>
+  </header>
+
+  <p class="lede">
+    Score-and-select driving planners choose one trajectory from a fixed, learned proposal
+    set. This project asks a narrow question: if you had perfect, privileged knowledge of
+    where every object in the scene is going to be, and the only thing you were allowed to
+    do with that knowledge is reject proposals and re-select from what the planner already
+    produced &mdash; would that actually reduce collisions?
+  </p>
+
+  <h2>Summary</h2>
+  <p>
+    Modern end-to-end planners like SparseDriveV2 generate up to 1,024 candidate trajectories
+    per frame and pick one by a learned score. That scoring is fast, but it reasons through a
+    fixed vocabulary &mdash; and objects outside that vocabulary can be effectively invisible
+    to the planner, which is exactly the failure mode that matters most in distribution-shift
+    scenarios.
+  </p>
+  <p>
+    I built a filter that sits between the planner's proposal set and the controller. It never
+    generates new trajectories and never brakes on its own &mdash; it only rejects proposals
+    whose footprint intersects occupancy, and re-selects the highest-scored proposal that's
+    left. I evaluated it against SparseDriveV2 on 185 Fail2Drive routes across 3 seeds, in a
+    design built specifically to survive the confounds that killed my first two attempts at
+    this experiment (more on that below).
+  </p>
+
+  <div class="callout">
+    <div class="callout-label">Result</div>
+    <p>
+      Temporal occupancy filtering reduced collision-route incidence by <strong>4.0 percentage
+      points</strong> relative to the unmodified planner (95% CI [&minus;7.7, &minus;0.4]),
+      negative at all three seeds, while satisfying a pre-specified route-completion guardrail.
+      Driving Score, Success Rate, and timeout incidence all moved favorably. The direct
+      temporal-vs-current-frame comparison did not resolve at 95% confidence.
+    </p>
+  </div>
+
+  <h2>Why this design, specifically</h2>
+  <p>
+    I used CARLA's ground-truth actor state as the occupancy source &mdash; not a learned
+    occupancy model &mdash; on purpose. This is an upper-bound experiment. If privileged,
+    perfect occupancy can't fix a planner's failures by reselecting among its own proposals,
+    the failure isn't a perception problem. It's that the proposal set itself doesn't contain
+    a safe trajectory for that scene. That's a more informative answer than "our occupancy
+    model helped a little," and it isolates exactly one variable: does having a time-correct
+    map of the world let you pick a better trajectory from what you already have?
+  </p>
+
+  <h3>Three arms</h3>
+  <table>
+    <thead>
+      <tr><th>Arm</th><th>Occupancy source</th><th>Selection rule</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Baseline</td><td>&mdash;</td><td>Unmodified planner (argmax of post-rescore score)</td></tr>
+      <tr><td>Current-frame</td><td>Present occupancy, repeated at every future waypoint</td><td>argmax among occupancy-clear proposals</td></tr>
+      <tr><td>Temporal</td><td>Constant-velocity propagated occupancy, aligned to each of the planner's 6 waypoint times</td><td>argmax among occupancy-clear proposals</td></tr>
+    </tbody>
+  </table>
+  <p>
+    The current-frame arm is a control, not a strawman: it isolates whether <em>time
+    alignment</em> specifically matters, or whether any occupancy-based veto would do about
+    the same thing. Freezing the world at the present instant treats every moving car as
+    a stationary wall &mdash; which turned out to matter a lot (see below).
+  </p>
+
+  <h3>Fallback logic</h3>
+  <p>
+    The filter never brakes and never invents a trajectory. If every proposal is occupied,
+    or the occupancy grid is invalid, or nothing valid remains, it keeps the planner's
+    original choice. Every one of five fallback reasons is logged, and driving failures
+    &mdash; collisions, timeouts, blockages, incomplete routes &mdash; are kept as outcomes,
+    not treated as errors to retry away.
+  </p>
+
+  <h2>Getting the evaluation right took two failed campaigns</h2>
+  <p>
+    The first version of this study looked great and was wrong, twice, for two different
+    reasons. I'm including this because the final result is only worth trusting <em>because</em>
+    of what got thrown out first.
+  </p>
+
+  <h3>Attempt 1: a 20-point effect that wasn't real</h3>
+  <p>
+    On a 15-route development split, temporal filtering cut collisions from 46.7% to 26.7%
+    &mdash; a 20-point apparent reduction. Fifteen routes isn't enough to estimate anything;
+    the split existed only to confirm the mechanism activated. On the actual 184-route test
+    campaign, the effect nearly vanished: &minus;2.7 points, confidence interval spanning
+    zero. The dev split's headline number didn't survive contact with a real sample.
+  </p>
+
+  <h3>Attempt 2: a real-looking effect I couldn't attribute</h3>
+  <p>
+    I redesigned the filter to preserve route progress rather than just vetoing hard, and
+    the next campaign showed collisions dropping from 83/185 to 70/185 &mdash; thirteen
+    fewer collision routes, in the right direction, on the metric that mattered.
+  </p>
+  <p>
+    I didn't publish it. Every route in that campaign ran in the same fixed order &mdash;
+    baseline, then temporal, then progress-preserving &mdash; on a long-lived CARLA process.
+    Treatment and execution position were perfectly correlated, and all six of the campaign's
+    extreme runaway-acceleration episodes landed in whichever arm ran first. I couldn't
+    separate "the filter works" from "running second and third is easier on the simulator,"
+    so I couldn't claim the result. I kept the underlying filter implementation and discarded
+    the campaign.
+  </p>
+
+  <blockquote>
+    A result you can't attribute to a cause isn't a result.
+  </blockquote>
+
+  <h3>What the final campaign fixed</h3>
+  <ul>
+    <li>Three evaluation seeds, not one &mdash; CARLA is non-deterministic enough that single-seed campaigns produced different collision counts for the identical baseline and temporal arms.</li>
+    <li>A fresh CARLA server and evaluator process for every single job &mdash; no long-lived process, no state carried between arms.</li>
+    <li>All six arm-order permutations balanced across the campaign, so treatment is orthogonal to execution position.</li>
+    <li>Route completion, collision definition, and interpretation criteria for a positive / null / negative / heterogeneous result all written down before any outcome was analyzed.</li>
+  </ul>
+  <p>
+    185 routes &times; 3 seeds &times; 3 arms = 1,665 jobs. While reviewing Fail2Drive's own
+    evaluation code for this campaign I also found a scenario-resolution bug that could
+    silently skip test scenarios &mdash; reported it, and it's now fixed upstream.
+  </p>
+
+  <h2>Results</h2>
+  <table>
+    <thead>
+      <tr><th>Outcome</th><th class="num">Baseline</th><th class="num">Current-frame</th><th class="num">Temporal</th><th class="num">&Delta; vs baseline</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Collision route</td><td class="num">43.4%</td><td class="num">43.1%</td><td class="num">39.5%</td><td class="num">&minus;4.0 pp [&minus;7.7, &minus;0.4]</td></tr>
+      <tr><td>Route completion</td><td class="num">93.6</td><td class="num">92.4</td><td class="num">94.2</td><td class="num">+0.6 pt [&minus;0.9, 2.3]</td></tr>
+      <tr><td>Driving Score</td><td class="num">49.8</td><td class="num">49.4</td><td class="num">51.9</td><td class="num">+2.1 pt [0.3, 4.0]</td></tr>
+      <tr><td>Success rate</td><td class="num">55.1%</td><td class="num">55.9%</td><td class="num">59.3%</td><td class="num">+4.1 pp [0.5, 7.9]</td></tr>
+      <tr><td>Any timeout</td><td class="num">12.6%</td><td class="num">12.3%</td><td class="num">9.9%</td><td class="num">&minus;2.7 pp [&minus;5.6, &minus;0.2]</td></tr>
+    </tbody>
+  </table>
+  <p>
+    555 jobs per arm (185 routes &times; 3 seeds). Confidence intervals are 95%, from a
+    20,000-resample route-family cluster bootstrap, which preserves the paired route/seed/arm
+    structure rather than treating individual frames or routes as independent.
+  </p>
+
+  <h3>Why current-frame filtering doesn't clearly beat baseline</h3>
+  <p>
+    Frame-level logging shows current-frame occupancy flags the planner's original choice on
+    54.6% of frames, but only 22.4% of those flagged frames actually have a clear alternative
+    to switch to &mdash; the rest get rejected outright with no safe proposal left. Freezing
+    the world at the present instant makes every moving actor a permanent obstacle, which is
+    overly restrictive rather than more protective. Temporal filtering shows the same pattern
+    less severely (48.1% flagged, 21.1% with a clear alternative), which is consistent with
+    why it outperforms the frozen-world control, even though that specific pairwise comparison
+    didn't reach significance on its own.
+  </p>
+
+  <h2 class="limits-h">Limitations</h2>
+  <ul class="limits">
+    <li>Occupancy comes from privileged CARLA simulator state, not a learned perception model &mdash; this isolates whether reselection helps at all, given perfect information, and says nothing about a deployable perception-driven version.</li>
+    <li>The occupancy grid is 2D with a fixed vertical slab. Overhead structures (bridges, gantries) can be flagged identically to ground-level obstacles.</li>
+    <li>Dynamic actors are propagated at constant velocity with fixed yaw &mdash; no acceleration, intent, or interaction modeling.</li>
+    <li>One planner, one benchmark, 185 routes, three seeds. No generalization claim beyond SparseDriveV2 on Fail2Drive.</li>
+    <li>The filter only rejects and reselects. It has no braking authority and cannot generate a trajectory outside the planner's original 1,024 proposals.</li>
+  </ul>
+
+  <footer>
+    Code and full protocol: <a href="https://github.com/das2sm">github.com/das2sm</a>
+  </footer>
+
+</div>
+</body>
+</html>
