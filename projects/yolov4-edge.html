@@ -1,275 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Real-time traffic sign detection on a $150 board — Soham Das</title>
-<style>
-  :root {
-    --bg: #ffffff;
-    --text: #1a1a1a;
-    --muted: #6b6b6b;
-    --line: #e5e5e5;
-    --mono: 'SF Mono', 'Menlo', 'Consolas', monospace;
-    --sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  }
-
-  * { box-sizing: border-box; }
-
-  body {
-    margin: 0;
-    background: var(--bg);
-    color: var(--text);
-    font-family: var(--sans);
-    font-size: 16px;
-    line-height: 1.7;
-    -webkit-font-smoothing: antialiased;
-  }
-
-  .wrap {
-    max-width: 640px;
-    margin: 0 auto;
-    padding: 48px 24px 120px;
-  }
-
-  .back {
-    display: inline-block;
-    font-family: var(--mono);
-    font-size: 13px;
-    color: var(--muted);
-    text-decoration: none;
-    margin-bottom: 40px;
-  }
-  .back:hover { color: var(--text); }
-
-  header {
-    margin-bottom: 48px;
-    padding-bottom: 32px;
-    border-bottom: 1px solid var(--line);
-  }
-
-  h1 {
-    font-size: 24px;
-    font-weight: 600;
-    line-height: 1.35;
-    margin: 0 0 12px;
-    letter-spacing: -0.01em;
-  }
-
-  .meta {
-    font-family: var(--mono);
-    font-size: 12px;
-    color: var(--muted);
-    margin-bottom: 14px;
-  }
-
-  .tags {
-    font-family: var(--mono);
-    font-size: 11px;
-    color: var(--muted);
-  }
-  .tags span::after { content: " · "; }
-  .tags span:last-child::after { content: ""; }
-
-  h2 {
-    font-size: 18px;
-    font-weight: 600;
-    margin: 44px 0 16px;
-  }
-
-  h3 {
-    font-size: 15px;
-    font-weight: 600;
-    margin: 26px 0 12px;
-    color: #333;
-  }
-
-  p {
-    margin: 0 0 16px;
-    color: #2a2a2a;
-  }
-
-  .lede {
-    font-size: 16px;
-    color: var(--muted);
-    margin: 0 0 8px;
-  }
-
-  ul, ol {
-    margin: 0 0 16px;
-    padding-left: 20px;
-    color: #2a2a2a;
-  }
-  li { margin-bottom: 6px; }
-
-  code {
-    font-family: var(--mono);
-    font-size: 13px;
-    background: #f5f5f5;
-    padding: 2px 5px;
-    border-radius: 3px;
-  }
-
-  pre {
-    background: #f7f7f7;
-    border: 1px solid var(--line);
-    border-radius: 4px;
-    padding: 14px 16px;
-    overflow-x: auto;
-    font-family: var(--mono);
-    font-size: 12.5px;
-    line-height: 1.6;
-    margin: 0 0 16px;
-  }
-  pre code { background: none; padding: 0; }
-
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 0 0 20px;
-    font-size: 14px;
-  }
-  th, td {
-    text-align: left;
-    padding: 8px 10px;
-    border-bottom: 1px solid var(--line);
-  }
-  th {
-    font-family: var(--mono);
-    font-size: 11px;
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-    color: var(--muted);
-    font-weight: 500;
-  }
-  td.num, th.num { text-align: right; font-family: var(--mono); }
-
-  .callout {
-    background: #fafafa;
-    border: 1px solid var(--line);
-    border-radius: 4px;
-    padding: 16px 18px;
-    margin: 24px 0;
-    font-size: 14.5px;
-  }
-  .callout p:last-child { margin-bottom: 0; }
-  .callout-label {
-    font-family: var(--mono);
-    font-size: 10px;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    color: var(--muted);
-    margin-bottom: 8px;
-  }
-
-  .pipeline {
-    font-family: var(--mono);
-    font-size: 13px;
-    background: #f7f7f7;
-    border: 1px solid var(--line);
-    border-radius: 4px;
-    padding: 16px 18px;
-    margin: 0 0 20px;
-    line-height: 1.9;
-  }
-  .pipeline .arrow { color: var(--muted); }
-
-  footer {
-    margin-top: 56px;
-    padding-top: 24px;
-    border-top: 1px solid var(--line);
-    font-family: var(--mono);
-    font-size: 12px;
-    color: var(--muted);
-  }
-  footer a { color: var(--text); }
-
-  @media (max-width: 480px) {
-    .wrap { padding: 32px 20px 80px; }
-    table { font-size: 13px; }
-    th, td { padding: 6px 6px; }
-  }
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Training YOLOv4 and deploying it to an Orange Pi 5 Ultra NPU at 60–70 FPS through ONNX and RKNN INT8 quantization.">
+  <title>Real-time traffic sign detection on a $150 board — Soham Das</title>
+  <link rel="stylesheet" href="/assets/style.css">
 </head>
 <body>
-<div class="wrap">
+  <main class="wrap article-wrap">
+    <a class="back" href="/">&larr; back</a>
 
-  <a class="back" href="/">&larr; back</a>
+    <header class="article-header">
+      <h1>Real-time traffic sign detection on a $150 board</h1>
+      <div class="meta">February–March 2026 · ACSI Laboratory, Feng Chia University</div>
+      <div class="tags">
+        <span>YOLOv4</span><span>RK3588</span><span>ONNX</span><span>INT8 quantization</span>
+      </div>
+    </header>
 
-  <header>
-    <h1>Real-time traffic sign detection on a $150 board</h1>
-    <div class="meta">February&ndash;March 2026 &nbsp;·&nbsp; ACSI Laboratory, Feng Chia University</div>
-    <div class="tags">
-      <span>YOLOv4</span><span>edge deployment</span><span>quantization</span><span>RK3588</span>
-    </div>
-  </header>
-
-  <p class="lede">
-    The goal was a clean, self-contained proof: take a model from training all the way
-    to real-time inference on hardware that costs less than a textbook, with nothing
-    hand-waved in between.
-  </p>
-
-  <h2>Training</h2>
-  <p>
-    I trained a YOLOv4 model on a 15-class traffic sign dataset. The first run was a clear
-    failure &mdash; <strong>17.96% mAP@0.5</strong>. The model was learning something, just
-    nowhere near usable. I worked through the standard checklist &mdash; data loading, label
-    format, anchor configuration, learning rate &mdash; before isolating the actual cause:
-    SGD with <code>weight_decay=5e-4</code> was preventing convergence at this dataset's scale.
-  </p>
-  <p>
-    Switching to Adam resolved it immediately. The second run cleared 80% mAP@0.5, and with
-    further tuning the model settled around <strong>95% mAP@0.5</strong>.
-  </p>
-  <div class="callout">
-    <div class="callout-label">Takeaway</div>
-    <p>
-      The optimizer isn't a hyperparameter you set once and forget &mdash; it's a modeling
-      decision with the same weight as the architecture itself.
+    <p class="lede">
+      My first project at ACSI was to train a traffic-sign detector and get the whole pipeline
+      running on an Orange Pi 5 Ultra, not just on a desktop GPU.
     </p>
-  </div>
 
-  <h2>Deployment pipeline</h2>
-  <p>
-    Training a model that runs well on an RTX 3090 solves a different problem than running
-    it at real-time speed on a single-board computer. I built the full conversion chain:
-  </p>
-  <div class="pipeline">
-    PyTorch (.pth) <span class="arrow">&darr; export</span><br>
-    ONNX (.onnx) <span class="arrow">&darr; convert + quantize</span><br>
-    RKNN (.rknn) &mdash; INT8 <span class="arrow">&darr; deploy</span><br>
-    Orange Pi 5 Ultra &mdash; RK3588 NPU
-  </div>
-  <p>Three decisions did most of the work:</p>
-  <ul>
-    <li><strong>INT8 quantization</strong> &mdash; the RK3588's NPU is dramatically faster at integer arithmetic than floating point, and the accuracy cost was small enough to be worth it.</li>
-    <li><strong>3-core NPU inference pool</strong> &mdash; the chip exposes three separate NPU cores. Running a pool across all three, instead of serializing on one, produced most of the total throughput gain.</li>
-    <li><strong>Vectorized NumPy post-processing</strong> &mdash; once the NPU is fast, naive Python-loop non-max suppression and box decoding becomes the actual bottleneck. Rewriting it in vectorized NumPy kept the CPU from throttling a pipeline the NPU was ready to run much faster.</li>
-  </ul>
+    <h2>Training</h2>
+    <p>
+      I trained YOLOv4 on a 15-class traffic-sign dataset. The first run reached only 17.96%
+      mAP@0.5. I checked the data pipeline, labels, anchors, and learning rate before narrowing the
+      problem down to the optimizer setup. Switching from SGD with the existing weight decay to Adam
+      changed the training behavior immediately. The next run passed 80% mAP@0.5, and after tuning I
+      reached about 95%.
+    </p>
 
-  <h2>Result</h2>
-  <table>
-    <thead>
-      <tr><th>Metric</th><th class="num">Result</th></tr>
-    </thead>
-    <tbody>
-      <tr><td>mAP@0.5 (15 classes)</td><td class="num">~95%</td></tr>
-      <tr><td>Throughput, Orange Pi 5 Ultra</td><td class="num">60&ndash;70 FPS</td></tr>
-      <tr><td>Hardware cost</td><td class="num">$150</td></tr>
-    </tbody>
-  </table>
-  <p>
-    A $150 board running 15-class detection well above real-time frame rates is the part
-    I'm most satisfied with on pure engineering grounds. It's a concrete demonstration that
-    meaningful ADAS-relevant perception doesn't require GPU-class compute &mdash; which
-    matters a great deal for cost-sensitive deployment.
-  </p>
+    <h2>Deployment</h2>
+    <p>
+      After training, I exported the model through ONNX and converted it to RKNN so it could run on
+      the RK3588 NPU in the Orange Pi. The deployed model used INT8 quantization.
+    </p>
 
-  <footer>
-    Related: <a href="/research/hydrive.html">the closed-loop safety study</a> this fed into
-  </footer>
+    <div class="pipeline">
+      PyTorch (.pth) <span class="arrow">→ export →</span><br>
+      ONNX (.onnx) <span class="arrow">→ convert + quantize →</span><br>
+      RKNN (.rknn, INT8) <span class="arrow">→ deploy →</span><br>
+      Orange Pi 5 Ultra (RK3588 NPU)
+    </div>
 
-</div>
+    <p>
+      Once NPU inference was fast enough, CPU-side post-processing became noticeable. I vectorized
+      the NumPy box decoding and non-maximum suppression code instead of leaving the hot path in
+      Python loops. I also used all three NPU cores rather than serializing inference on one core.
+    </p>
+
+    <div class="figure-pair">
+      <figure>
+        <img src="/assets/images/yolov4-hardware.webp" alt="Webcam used with the Orange Pi traffic sign detection setup">
+        <figcaption>The webcam used for the live detector setup.</figcaption>
+      </figure>
+      <figure>
+        <img src="/assets/images/yolov4-detection.webp" alt="Orange Pi setup running live traffic sign detection">
+        <figcaption>Early live inference on the Orange Pi; throughput was improved later in the deployment work.</figcaption>
+      </figure>
+    </div>
+
+    <h2>Result</h2>
+    <div class="table-scroll">
+      <table>
+        <thead><tr><th>Metric</th><th class="num">Result</th></tr></thead>
+        <tbody>
+          <tr><td>mAP@0.5, 15 classes</td><td class="num">~95%</td></tr>
+          <tr><td>Orange Pi 5 Ultra throughput</td><td class="num">60–70 FPS</td></tr>
+          <tr><td>Deployment format</td><td class="num">RKNN INT8</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>
+      The useful part of this project for me was doing all of it: training, debugging convergence,
+      conversion, quantization, hardware deployment, and then finding the next bottleneck after the
+      NPU was no longer the slowest part.
+    </p>
+
+    <footer class="article-footer">
+      Related: <a href="/research/sparseocc.html">SparseOcc reproduction</a> · <a href="/research/hydrive.html">closed-loop safety study</a>
+    </footer>
+  </main>
 </body>
 </html>

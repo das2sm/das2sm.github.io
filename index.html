@@ -1,234 +1,126 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Soham Das</title>
-<style>
-  :root {
-    --bg: #ffffff;
-    --text: #1a1a1a;
-    --muted: #6b6b6b;
-    --line: #e5e5e5;
-    --mono: 'SF Mono', 'Menlo', 'Consolas', monospace;
-    --sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  }
-
-  * { box-sizing: border-box; }
-
-  body {
-    margin: 0;
-    background: var(--bg);
-    color: var(--text);
-    font-family: var(--sans);
-    font-size: 16px;
-    line-height: 1.65;
-    -webkit-font-smoothing: antialiased;
-  }
-
-  .wrap {
-    max-width: 640px;
-    margin: 0 auto;
-    padding: 80px 24px 120px;
-  }
-
-  header {
-    margin-bottom: 64px;
-  }
-
-  h1 {
-    font-size: 26px;
-    font-weight: 600;
-    margin: 0 0 6px;
-    letter-spacing: -0.01em;
-  }
-
-  .role {
-    color: var(--muted);
-    font-size: 15px;
-    margin: 0 0 20px;
-  }
-
-  .links {
-    display: flex;
-    gap: 16px;
-    font-family: var(--mono);
-    font-size: 13px;
-  }
-
-  .links a {
-    color: var(--text);
-    text-decoration: none;
-    border-bottom: 1px solid var(--line);
-    padding-bottom: 1px;
-  }
-
-  .links a:hover {
-    border-bottom-color: var(--text);
-  }
-
-  section {
-    margin-bottom: 56px;
-  }
-
-  section:last-of-type {
-    margin-bottom: 0;
-  }
-
-  h2 {
-    font-family: var(--mono);
-    font-size: 12px;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: var(--muted);
-    font-weight: 500;
-    margin: 0 0 20px;
-    padding-bottom: 10px;
-    border-bottom: 1px solid var(--line);
-  }
-
-  p {
-    margin: 0 0 16px;
-    color: #333;
-  }
-
-  p:last-child { margin-bottom: 0; }
-
-  .entry {
-    display: block;
-    text-decoration: none;
-    color: inherit;
-    padding: 18px 0;
-    border-bottom: 1px solid var(--line);
-  }
-
-  .entry:last-child { border-bottom: none; }
-
-  .entry-top {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    gap: 16px;
-    margin-bottom: 6px;
-  }
-
-  .entry-title {
-    font-size: 16px;
-    font-weight: 600;
-    color: var(--text);
-  }
-
-  .entry-date {
-    font-family: var(--mono);
-    font-size: 12px;
-    color: var(--muted);
-    white-space: nowrap;
-  }
-
-  .entry-desc {
-    font-size: 14px;
-    color: var(--muted);
-    margin: 0;
-  }
-
-  .entry-tags {
-    font-family: var(--mono);
-    font-size: 11px;
-    color: var(--muted);
-    margin-top: 8px;
-  }
-
-  .entry-tags span::after {
-    content: " · ";
-  }
-  .entry-tags span:last-child::after {
-    content: "";
-  }
-
-  @media (max-width: 480px) {
-    .wrap { padding: 48px 20px 80px; }
-    .entry-top { flex-direction: column; gap: 2px; }
-  }
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Soham Das — Computer Science student at the University of Cincinnati working on autonomous driving, perception, and ML systems.">
+  <title>Soham Das</title>
+  <link rel="stylesheet" href="/assets/style.css">
 </head>
 <body>
-<div class="wrap">
+  <main class="wrap">
+    <header class="site-header">
+      <h1>Soham Das</h1>
+      <p class="role">CS student, University of Cincinnati — autonomous driving &amp; ML systems</p>
+      <nav class="links" aria-label="Contact links">
+        <a href="mailto:das2sm@mail.uc.edu">email</a>
+        <a href="https://github.com/das2sm">github</a>
+        <a href="https://linkedin.com/in/soham-s-das">linkedin</a>
+        <a href="/resume.pdf">resume</a>
+      </nav>
+    </header>
 
-  <header>
-    <h1>Soham Das</h1>
-    <p class="role">CS student, University of Cincinnati — AI &amp; autonomous systems</p>
-    <div class="links">
-      <a href="mailto:das2sm@mail.uc.edu">email</a>
-      <a href="https://github.com/das2sm">github</a>
-      <a href="https://linkedin.com/in/soham-s-das">linkedin</a>
-      <a href="/resume.pdf">resume</a>
-    </div>
-  </header>
-
-  <section id="about">
-    <h2>About</h2>
-    <p>
-      I'm a Computer Science student at the University of Cincinnati, mostly interested
-      in perception and safety for autonomous vehicles. I spent early-to-mid 2026 as an undergraduate researcher at Feng Chia University's
-      ACSI Laboratory in Taiwan, working on closed-loop safety for end-to-end driving
-      planners.
-    </p>
-  </section>
-
-  <section id="research">
-    <h2>Research</h2>
-
-    <a class="entry" href="/research/hydrive.html">
-      <div class="entry-top">
-        <span class="entry-title">Privileged Occupancy Filtering for Fixed-Vocabulary End-to-End Driving</span>
-        <span class="entry-date">Jul 2026</span>
-      </div>
-      <p class="entry-desc">
-        A 1,665-job closed-loop intervention study on SparseDriveV2 / Fail2Drive testing
-        whether privileged occupancy can reduce collisions by re-selecting among a
-        planner's existing trajectory proposals.
+    <section id="about">
+      <h2 class="section-label">About</h2>
+      <p class="about-copy">
+        I'm a Computer Science student at the University of Cincinnati. My recent work has been
+        around autonomous driving, especially perception, closed-loop evaluation, and the gap
+        between what a planner can perceive and what it can actually do. I spent February through
+        August 2026 at Feng Chia University's ACSI Laboratory in Taiwan, where most of the work
+        below was done.
       </p>
-      <div class="entry-tags">
-        <span>CARLA</span><span>PyTorch</span><span>experimental design</span><span>manuscript in prep</span>
+    </section>
+
+    <section id="research">
+      <h2 class="section-label">Research</h2>
+
+      <a class="card" href="/research/hydrive.html">
+        <img class="card-media" src="/assets/images/hydrive-bev.webp" alt="BEV visualization of occupancy filtering around an ego trajectory">
+        <div>
+          <div class="card-title-row">
+            <span class="card-title">Privileged Occupancy Filtering for Fixed-Vocabulary End-to-End Driving</span>
+            <span class="card-date">Apr–Aug 2026</span>
+          </div>
+          <p class="card-desc">
+            A 1,665-job closed-loop study on SparseDriveV2 and Fail2Drive. Temporal occupancy
+            filtering reduced collision-route incidence by 4.0 percentage points while preserving
+            route completion.
+          </p>
+          <div class="tags">
+            <span>CARLA</span><span>SparseDriveV2</span><span>Fail2Drive</span><span>closed-loop evaluation</span>
+          </div>
+        </div>
+      </a>
+
+      <a class="card" href="/research/sparseocc.html">
+        <img class="card-media contain" src="/assets/images/sparseocc-bev.webp" alt="SparseOcc semantic occupancy prediction in bird's-eye view">
+        <div>
+          <div class="card-title-row">
+            <span class="card-title">Reproducing SparseOcc on nuScenes</span>
+            <span class="card-date">Mar 2026</span>
+          </div>
+          <p class="card-desc">
+            Reproduced the published 0.368 RayIoU result and built a working Docker environment
+            around an older CUDA/mmcv stack after hitting a hardware compatibility wall.
+          </p>
+          <div class="tags">
+            <span>3D perception</span><span>Docker</span><span>CUDA</span><span>nuScenes</span>
+          </div>
+        </div>
+      </a>
+    </section>
+
+    <section id="experience">
+      <h2 class="section-label">Experience</h2>
+
+      <div class="experience-item">
+        <div>
+          <div class="experience-title">Autonomous Driving Researcher</div>
+          <div class="experience-org">ACSI Laboratory, Feng Chia University · Taiwan</div>
+        </div>
+        <div class="experience-date">Feb–Aug 2026</div>
+        <p class="experience-desc">Closed-loop planner safety, 3D occupancy perception, and edge deployment for autonomous-driving systems.</p>
       </div>
-    </a>
 
-    <a class="entry" href="/research/sparseocc.html">
-      <div class="entry-top">
-        <span class="entry-title">Reproducing SparseOcc on nuScenes</span>
-        <span class="entry-date">Mar 2026</span>
+      <div class="experience-item">
+        <div>
+          <div class="experience-title">Backend Developer Intern</div>
+          <div class="experience-org">Wizzer</div>
+        </div>
+        <div class="experience-date">May–Aug 2025</div>
+        <p class="experience-desc">API performance work, latency monitoring, deep-link routing, and backend reliability.</p>
       </div>
-      <p class="entry-desc">
-        Matching a published 3D occupancy benchmark (0.368 RayIoU) from scratch,
-        and the dependency hell of getting research code to run on hardware it
-        was never tested on.
-      </p>
-      <div class="entry-tags">
-        <span>3D perception</span><span>Docker</span><span>CUDA</span>
+
+      <div class="experience-item">
+        <div>
+          <div class="experience-title">Lab Grader</div>
+          <div class="experience-org">University of Cincinnati, College of Engineering and Applied Science</div>
+        </div>
+        <div class="experience-date">Sep–Dec 2023</div>
+        <p class="experience-desc">Graded introductory C++ labs and provided feedback on implementation and documentation.</p>
       </div>
-    </a>
+    </section>
 
-  </section>
+    <section id="projects">
+      <h2 class="section-label">Projects</h2>
 
-  <section id="projects">
-    <h2>Projects</h2>
-
-    <a class="entry" href="/projects/yolov4-edge.html">
-      <div class="entry-top">
-        <span class="entry-title">Real-time traffic sign detection on a $150 board</span>
-        <span class="entry-date">Feb 2026</span>
-      </div>
-      <p class="entry-desc">
-        YOLOv4 trained to 95% mAP@0.5, deployed to an Orange Pi 5 Ultra NPU at
-        60&ndash;70 FPS via a full PyTorch &rarr; ONNX &rarr; RKNN quantization pipeline.
-      </p>
-      <div class="entry-tags">
-        <span>YOLOv4</span><span>edge deployment</span><span>quantization</span>
-      </div>
-    </a>
-
-  </section>
-
-</div>
+      <a class="card" href="/projects/yolov4-edge.html">
+        <img class="card-media" src="/assets/images/yolov4-detection.webp" alt="Traffic sign detector running on an Orange Pi setup">
+        <div>
+          <div class="card-title-row">
+            <span class="card-title">Real-time traffic sign detection on a $150 board</span>
+            <span class="card-date">Feb–Mar 2026</span>
+          </div>
+          <p class="card-desc">
+            Trained YOLOv4 to about 95% mAP@0.5 and deployed it at 60–70 FPS on an Orange Pi 5 Ultra
+            through a PyTorch → ONNX → RKNN INT8 pipeline.
+          </p>
+          <div class="tags">
+            <span>YOLOv4</span><span>RK3588</span><span>ONNX</span><span>quantization</span>
+          </div>
+        </div>
+      </a>
+    </section>
+  </main>
 </body>
 </html>
