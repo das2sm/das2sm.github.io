@@ -5,7 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Soham Das — Computer Science student at the University of Cincinnati working on autonomous driving, perception, and ML systems.">
   <title>Soham Das</title>
+  <script>
+    (() => {
+      const savedTheme = localStorage.getItem('theme');
+      const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      document.documentElement.dataset.theme = savedTheme || systemTheme;
+    })();
+  </script>
   <link rel="stylesheet" href="/assets/style.css">
+  <script src="/assets/theme.js" defer></script>
 </head>
 <body>
   <main class="wrap">
@@ -16,7 +24,7 @@
         <a href="mailto:das2sm@mail.uc.edu">email</a>
         <a href="https://github.com/das2sm">github</a>
         <a href="https://linkedin.com/in/soham-s-das">linkedin</a>
-        <a href="/resume.pdf">resume</a>
+        <a href="/cv.pdf">cv</a>
       </nav>
     </header>
 

@@ -5,7 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="A closed-loop study testing privileged temporal occupancy filtering on SparseDriveV2 using the Fail2Drive benchmark.">
   <title>Privileged Occupancy Filtering for Fixed-Vocabulary End-to-End Driving — Soham Das</title>
+  <script>
+    (() => {
+      const savedTheme = localStorage.getItem('theme');
+      const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      document.documentElement.dataset.theme = savedTheme || systemTheme;
+    })();
+  </script>
   <link rel="stylesheet" href="/assets/style.css">
+  <script src="/assets/theme.js" defer></script>
 </head>
 <body>
   <main class="wrap article-wrap">
